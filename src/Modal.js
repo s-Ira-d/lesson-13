@@ -4,17 +4,13 @@ import "./Modal.css";
 class Modal extends Component {
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeyDown);
+    alert("Modal is open!!");
   }
 
   componentWillUnmount() {
     window.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.isOpen && this.props.isOpen) {
-      alert("Modal is open!");
-    }
-  }
   handleKeyDown = (e) => {
     if (e.code === "Escape") {
       this.props.onClose();
@@ -28,13 +24,8 @@ class Modal extends Component {
   };
 
   render() {
-    // if (!this.props.isOpen) return null;
     return (
-      <div
-        className="backdrop"
-        style={{ display: this.props.isOpen ? "block" : "none" }}
-        onClick={this.props.handleBackDrop}
-      >
+      <div className="backdrop" onClick={this.handleBackDrop}>
         <div className="modal">
           <button onClick={this.props.onClose}>x</button>
           <p>Lorem</p>
